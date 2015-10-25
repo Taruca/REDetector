@@ -47,24 +47,9 @@
                 <li><a href="#contact">Contact</a></li>
                 @yield('personal')
             </ul>
-            <div class="navbar-form navbar-right">
+            <div class="navbar-right">
                 @yield('navRight')
             </div>
-            {{--{!! Form::open(['class' => 'navbar-form navbar-right', 'url' => '/auth/login']) !!}
-            <div class="form-group">
-                {!! Form::text('', null, ['placeholder' => 'Email', 'class' => 'form-control']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::password('', ['placeholder' => 'Password' ,'class' => 'form-control']) !!}
-            </div>
-            {!! Form::submit('Sign in', ['class' => 'btn btn-primary form-control']) !!}
-            --}}{{--
-                            <button type="submit" class="btn btn-primary">Sign in</button>
-            --}}{{--
-            <button type="submit" class="btn btn-success">Register</button>
-            {!! Form::close() !!}
---}}
-
         </div><!--/.nav-collapse -->
     </div>
 </nav>
@@ -78,21 +63,13 @@
     </div>
 </footer>
 
-@if($errors->any())
-<ul class="list-group">
-@foreach($errors->all() as $error)
-    <li class="list-group-item list-group-item-danger">{{ $error }}</li>
-@endforeach
-</ul>
-@endif
-
-<!-- Bootstrap core JavaScript
+            <!-- Bootstrap core JavaScript
   ================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/docs.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

@@ -1,13 +1,13 @@
 @extends('head/loginHead')
 @section('navRight')
-    <button type="submit" class="btn btn-success">Register</button>
+    <a href="/auth/register" class="btn btn-success" role="button">Register</a>
 @stop
 
 @section('content')
     <div class="container">
         <div class="col-md-4 col-md-offset-4">
             {!! Form::open(['url' => '/auth/login']) !!}
-                    <!--- Email Field --->
+            <!--- Email Field --->
             <div class="form-group">
                 {!! Form::label('email', 'Email:') !!}
                 {!! Form::email('email', null, ['class' => 'form-control']) !!}
