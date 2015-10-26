@@ -13,3 +13,20 @@
         </li>
     </ul>
 @stop
+@section('content')
+    <div class="col-md-offset-1">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Home</a></li>
+            <li role="presentation"><a href="#profile" id="profile-tab" data-toggle="tab" aria-controls="profile">Profile</a></li>
+            <li role="presentation"><a href="#">Messages</a></li>
+        </ul>
+    </div>
+    <div id="myTabContent" class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active col-md-offset-1" id="home" aria-labelledby="home-tab">
+            <h2>home tab</h2>
+        </div>
+        <div role="tabpanel" class="tab-pane fade col-md-offset-1" id="profile" aria-labelledby="profile-tab">
+            <h2>profile tab</h2>
+        </div>
+    </div>
+@stop

@@ -54,6 +54,14 @@
     </div>
 </nav>
 
+<div class="container theme-showcase" role="main">
+    {{-- Introduce of RNAEditing Page --}}
+    <div class="jumbotron">
+        <h1>RNA Editing Detector</h1>
+        <p>We provide exact, convenient and free services for you to analyse RNA editing events.</p>
+    </div>
+</div>
+
 @yield('content')
 
 {{-- Copyright --}}
