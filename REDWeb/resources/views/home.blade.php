@@ -122,7 +122,7 @@
                     <div class="wrapper_components_pillar"><div class="container-fluid"><div class="container"><div class="row">
                                     <div class="col-xs-4 col-sm-4 pillar"></div>
                                     <div class="col-xs-4 col-sm-4 pillar">
-                                        {!! Form::open(['url' => '/']) !!}
+                                        {!! Form::open(['action' => 'HomeController@upload', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
                                             <div class="form-group">
                                                 <hr>
                                                 <p>Choose RNA vcf file(<span style="color:red">required</span>):</p>
@@ -131,7 +131,7 @@
                                                 <hr>
                                                 <p>Choose DNA vcf file(<span style="color:red">optional</span>):</p>
                                                 <center class="col-xs-offset-1">{!! Form::radio('dnaFileFormat', 'dnaVcf') !!}DNA vcf file</center>
-                                                <div class="col-xs-offset-4">{!! Form::file('rnaVcfFile') !!}</div>
+                                                <div class="col-xs-offset-4">{!! Form::file('dnaVcfFile') !!}</div>
                                                 <hr>
                                                 {!! Form::submit('Upload', ['class' => 'btn btn-primary col-xs-offset-4']) !!}
                                             </div>
