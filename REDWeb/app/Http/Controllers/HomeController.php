@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller
 {
@@ -16,6 +17,11 @@ class HomeController extends Controller
     public function index()
     {
         return view('/home');
+    }
+
+    public function upload()
+    {
+        dd(Input::file('rnaVcfFile'));
     }
 
     /**

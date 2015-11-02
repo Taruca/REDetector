@@ -14,17 +14,21 @@
     </ul>
 @stop
 @section('content')
-    <div class="col-md-offset-1">
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#gettingStarted" id="gettingStarted-tab" role="tab" data-toggle="tab" aria-controls="gettingStarted" aria-expanded="true">Getting started</a></li>
-            <li role="presentation"><a href="#profile" id="profile-tab" data-toggle="tab" aria-controls="profile">Profile</a></li>
-            <li role="presentation"><a href="#">Messages</a></li>
-        </ul>
+    <div class="container-fluid">
+        <div class="col-md-1"></div>
+        <div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#gettingStarted" id="gettingStarted-tab" role="tab" data-toggle="tab" aria-controls="gettingStarted" aria-expanded="true">Getting started</a></li>
+                <li role="presentation"><a href="#runningOptions" id="runningOptions-tab" data-toggle="tab" aria-controls="runningOptions">Running Options</a></li>
+                <li role="presentation"><a href="#uploadingFiles" id="uploadingFiles-tab" data-toggle="tab" aria-controls="uploadingFiles">Uploading Files</a></li>
+            </ul>
+        </div>
+        <div class="col-md-1"></div>
     </div>
 
     <div class="tab-content wrapper wrapper_home_home_content">
 
-            <div role="tabpanel" class="tab-pane fade in active" id="gettingStarted" aria-labelledby="gettingStarted-tab">
+        <div role="tabpanel" class="tab-pane fade in active" id="gettingStarted" aria-labelledby="gettingStarted-tab">
                 <div class="container">
                     <div class="row">
                         <h2 class="text-center">An overview of how to use our RNA Editing Detector</h2>
@@ -64,9 +68,83 @@
                 </div>
             </div>
 
-            <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
-                <h2>profile tab</h2>
+        <div role="tabpanel" class="tab-pane fade" id="runningOptions" aria-labelledby="runningOptions-tab">
+                <div class="container">
+                    <div class="row">
+                        <h2 class="text-center">Running options of RNA Editing Detector</h2>
+                        <div class="wrapper_components_pillar"><div class="container-fluid"><div class="container"><div class="row">
+                                        <div class="col-xs-4 col-sm-4 pillar"></div>
+                                        <div class="col-xs-4 col-sm-4 pillar">
+                                            {!! Form::open(['url' => '/']) !!}
+                                            <div class="form-group">
+                                                <hr>
+                                                <p>Editing Type:</p>
+                                                <center>
+                                                    {!! Form::radio('editingType', 'AG', 'AG') !!}A-to-G&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    {!! Form::radio('editingType', 'TC') !!}T-to-C
+                                                </center>
+                                                <hr>
+                                                <p>Quality(range of 1-255):</p>
+                                                <center>
+                                                    {!! Form::text('q', '20') !!}
+                                                </center>
+                                                <hr>
+                                                <p>Depth of coverage(range of 1-255):</p>
+                                                <center>
+                                                    {!! Form::text('dp', '6') !!}
+                                                </center>
+                                                <hr>
+                                                <p>Splice-junction length(range of 1-99):</p>
+                                                <center>
+                                                    {!! Form::text('sj', '2') !!}
+                                                </center>
+                                                <hr>
+                                                <p>The radio of a site whether it's a RNA editing or not:</p>
+                                                <center>
+                                                    {!! Form::text('rnaRadio', '4.0') !!}
+                                                </center>
+                                                <hr>
+                                                {!! Form::submit('Submit', ['class' => 'btn btn-primary col-xs-offset-4']) !!}
+                                            </div>
+                                            {!! Form::close() !!}
+                                        </div>
+                                        <div class="col-xs-4 col-sm-3 pillar"></div>
+                        </div></div></div></div>
+
+                    </div>
+                </div>
             </div>
+
+        <div role="tabpanel" class="tab-pane fade" id="uploadingFiles" aria-labelledby="uploadingFiles-tab">
+            <div class="container">
+                <div class="row">
+                    <h2 class="text-center">Uploading your RNA and DNA vcf files here</h2>
+                    <div class="wrapper_components_pillar"><div class="container-fluid"><div class="container"><div class="row">
+                                    <div class="col-xs-4 col-sm-4 pillar"></div>
+                                    <div class="col-xs-4 col-sm-4 pillar">
+                                        {!! Form::open(['action' => 'HomeController@upload', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+                                            <div class="form-group">
+                                                <hr>
+                                                <p>Choose RNA vcf file(<span style="color:red">required</span>):</p>
+                                                <center class="col-xs-offset-1">{!! Form::radio('rnaFileFormat', 'rnaVcf', 'rnaVcf') !!}RNA vcf file<span style="color:red">*</span></center>
+                                                <div class="col-xs-offset-4">{!! Form::file('rnaVcfFile') !!}</div>
+                                                <hr>
+                                                <p>Choose DNA vcf file(<span style="color:red">optional</span>):</p>
+                                                <center class="col-xs-offset-1">{!! Form::radio('dnaFileFormat', 'dnaVcf') !!}DNA vcf file</center>
+                                                <div class="col-xs-offset-4">{!! Form::file('dnaVcfFile') !!}</div>
+                                                <hr>
+                                                {!! Form::submit('Upload', ['class' => 'btn btn-primary col-xs-offset-4']) !!}
+                                            </div>
+                                        {!! Form::close() !!}
+
+                                    </div>
+                                    <div class="col-xs-4 col-sm-3 pillar"></div>
+                    </div></div></div></div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 
 @stop
