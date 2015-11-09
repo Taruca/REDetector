@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller
@@ -19,9 +20,26 @@ class HomeController extends Controller
         return view('/home');
     }
 
+    //文件类型还未限制
     public function upload()
     {
-        dd(Input::file('rnaVcfFile'));
+        $file = Input::file('rnaVcfFile');
+        if($file->isValid()) {
+            /*$clientName = $file->getClientOriginalName();
+            $tmpName = $file->getFileName();
+            $realPath = $file->getRealPath();
+            $entension = $file->getClientOriginalExtension();
+            $mimeType = $file->getMimeType();*/
+            $userName = Auth::user()->id;
+            $newName = $userName . '_rna.vcf';
+            $path = $file->move('../storage/vcf_file', $newName);
+            redirect('/');
+        }
+    }
+
+    public function tables()
+    {
+        return view('/files');
     }
 
     /**

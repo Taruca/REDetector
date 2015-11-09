@@ -2,9 +2,9 @@
 @section('navRight')
     <ul class="nav navbar-nav">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Personal <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li><a href="#">My Files</a></li>
+                <li><a href="/files">My Files</a></li>
                 <li><a href="#">Personal Information</a></li>
                 <li><a href="#">Change Your Password</a></li>
                 <li role="separator" class="divider"></li>
@@ -43,6 +43,7 @@
                                         <div class="col-xs-10 col-sm-5 pillar">
                                             <h2>Install running settings</h2>
                                             <p>Cilck "Running Settings" tab above and install the settings as you wish.</p>
+                                            <hr>
                                         </div>
 
                                         <div class="col-xs-2 col-sm-1 pillar">
@@ -51,6 +52,7 @@
                                         <div class="col-xs-10 col-sm-5 pillar">
                                             <h2>Upload your RNA or DNA files</h2>
                                             <p>Cilck "Upload Files" tab above and upload your RNA or DNA files as hint.</p>
+                                            <hr>
                                         </div>
 
                                         <div class="col-xs-2 col-sm-1 pillar">
@@ -59,14 +61,21 @@
                                         <div class="col-xs-10 col-sm-5 pillar">
                                             <h2>Wait the results</h2>
                                             <p>We will analyse your RNA and DNA data on our servers and sends email to you once we get the results. You can then checkout and download the results in "My files".</p>
+                                            <hr>
                                         </div>
+
+                                        <div class="col-xs-2 col-sm-1 pillar">
+                                        </div>
+                                        <div class="col-xs-10 col-sm-5 pillar">
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+        </div>
 
         <div role="tabpanel" class="tab-pane fade" id="runningOptions" aria-labelledby="runningOptions-tab">
                 <div class="container">
@@ -113,7 +122,7 @@
 
                     </div>
                 </div>
-            </div>
+        </div>
 
         <div role="tabpanel" class="tab-pane fade" id="uploadingFiles" aria-labelledby="uploadingFiles-tab">
             <div class="container">
