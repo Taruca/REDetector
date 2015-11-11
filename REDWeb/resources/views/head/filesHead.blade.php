@@ -38,7 +38,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">RNA Edting Detector</a>
+            <a class="navbar-brand" href="/home">RNA Edting Detector</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">

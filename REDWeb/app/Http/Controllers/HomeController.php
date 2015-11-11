@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller
@@ -20,7 +21,7 @@ class HomeController extends Controller
         return view('/home');
     }
 
-    //ÎÄ¼şÀàĞÍ»¹Î´ÏŞÖÆ
+    //ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Í»ï¿½Î´ï¿½ï¿½ï¿½ï¿½
     public function upload()
     {
         $file = Input::file('rnaVcfFile');
@@ -39,7 +40,17 @@ class HomeController extends Controller
 
     public function tables()
     {
-        return view('/files');
+        $userTables = Auth::user()->tables;
+        $tables = explode('/', $userTables);
+        $table1 = $tables[0];
+        $tableElse = array_slice($tables, 1); //delete the first element of $tables
+        $tableContents = array();
+        $tableContents[0] = DB::table($table1)->get();
+        for ($i = 0; $i < count($tableElse); $i ++) {
+            $tableElseContents[$i] = DB::table($tableElse[$i])->get();
+        }
+
+        return view('/files', compact('table1', 'tableElse', 'tableContents', 'tableElseContents'));
     }
 
     /**
