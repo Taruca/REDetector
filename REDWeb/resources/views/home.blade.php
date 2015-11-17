@@ -132,20 +132,26 @@
                                     <div class="col-xs-4 col-sm-4 pillar"></div>
                                     <div class="col-xs-4 col-sm-4 pillar">
                                         {!! Form::open(['action' => 'HomeController@upload', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
-                                            <div class="form-group">
-                                                <hr>
-                                                <p>Choose RNA vcf file(<span style="color:red">required</span>):</p>
-                                                <center class="col-xs-offset-1">{!! Form::radio('rnaFileFormat', 'rnaVcf', 'rnaVcf') !!}RNA vcf file<span style="color:red">*</span></center>
-                                                <div class="col-xs-offset-4">{!! Form::file('rnaVcfFile') !!}</div>
-                                                <hr>
-                                                <p>Choose DNA vcf file(<span style="color:red">optional</span>):</p>
-                                                <center class="col-xs-offset-1">{!! Form::radio('dnaFileFormat', 'dnaVcf') !!}DNA vcf file</center>
-                                                <div class="col-xs-offset-4">{!! Form::file('dnaVcfFile') !!}</div>
-                                                <hr>
-                                                {!! Form::submit('Upload', ['class' => 'btn btn-primary col-xs-offset-4']) !!}
-                                            </div>
+                                        <div class="form-group">
+                                            <hr>
+                                            <p>Choose RNA vcf file(<span style="color:red">required</span>):</p>
+                                            <center class="col-xs-offset-1">{!! Form::radio('rnaFileFormat', 'rnaVcf', 'rnaVcf') !!}RNA vcf file<span style="color:red">*</span></center>
+                                            <div class="col-xs-offset-4">{!! Form::file('rnaVcfFile') !!}</div>
+                                            <hr>
+                                            {!! Form::submit('Upload', ['class' => 'btn btn-primary col-xs-offset-4']) !!}
+                                        </div>
                                         {!! Form::close() !!}
 
+                                        {!! Form::open(['action' => 'HomeController@upload', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+                                        <div class="form-group">
+                                            <hr>
+                                            <p>Choose DNA vcf file(<span style="color:red">optional</span>):</p>
+                                            <center class="col-xs-offset-1">{!! Form::radio('dnaFileFormat', 'dnaVcf') !!}DNA vcf file</center>
+                                            <div class="col-xs-offset-4">{!! Form::file('dnaVcfFile') !!}</div>
+                                            <hr>
+                                            {!! Form::submit('Upload', ['class' => 'btn btn-primary col-xs-offset-4']) !!}
+                                        </div>
+                                        {!! Form::close() !!}
                                     </div>
                                     <div class="col-xs-4 col-sm-3 pillar"></div>
                     </div></div></div></div>

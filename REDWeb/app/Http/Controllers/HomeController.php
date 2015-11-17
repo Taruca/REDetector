@@ -21,21 +21,31 @@ class HomeController extends Controller
         return view('/home');
     }
 
-    //�ļ����ͻ�δ����
-    public function upload()
-    {
-        $file = Input::file('rnaVcfFile');
-        if($file->isValid()) {
-            /*$clientName = $file->getClientOriginalName();
-            $tmpName = $file->getFileName();
-            $realPath = $file->getRealPath();
-            $entension = $file->getClientOriginalExtension();
-            $mimeType = $file->getMimeType();*/
-            $userName = Auth::user()->id;
-            $newName = $userName . '_rna.vcf';
-            $path = $file->move('../storage/vcf_file', $newName);
-            redirect('/');
+    public function upload() {
+        $userName = Auth::user()->id;
+        if (Input::hasFile('rnaVcfFile')) {
+            $fileRNA = Input::file('rnaVcfFile');
+            if($fileRNA->isValid()) {
+                /*$clientName = $file->getClientOriginalName();
+                $tmpName = $file->getFileName();
+                $realPath = $file->getRealPath();
+                $entension = $file->getClientOriginalExtension();
+                $mimeType = $file->getMimeType();*/
+                $newName = $userName . '_rna.vcf';
+                /*$path = */
+                $fileRNA->move('../storage/vcf_file', $newName);
+                redirect('/');
+            }
+        } elseif(Input::hasFile('dnaVcfFile')) {
+            $fileDNA = Input::file('dnaVcfFile');
+            if($fileDNA->isValid()) {
+                $newName = $userName . '_dna.vcf';
+                /*$path = */
+                $fileDNA->move('../storage/vcf_file', $newName);
+                redirect('/');
+            }
         }
+
     }
 
     public function tables()

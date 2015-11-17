@@ -26,4 +26,5 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 Route::get('/home', 'HomeController@index');
 Route::post('/home', 'HomeController@upload');
+/*Route::post('/home', 'HomeController@uploadDNA');*/
 Route::get('/files', 'HomeController@tables');
