@@ -63,6 +63,79 @@ class HomeController extends Controller
         return view('/files', compact('table1', 'tableElse', 'tableContents', 'tableElseContents'));
     }
 
+    public function download($table)
+    {
+        //dd($table);
+        $tableNameArray = explode('_', $table);
+        $tableName = $tableNameArray[1] ."_" .$tableNameArray[4];
+        $filePath = "../storage/resultFiles";
+        $fileName = $filePath .'/' .$tableName .".txt";
+        $sqlClause = 'select * from ' .$table;
+        $rs = DB::select($sqlClause);
+        if(is_dir($filePath)) {
+            $fp = fopen($fileName, 'w');
+            $firstLine = "#CHROM    POS    ID    REF    ALT    QUAL    FILTER    INFO    GT    AD    DP    GQ    PL    alu";
+            file_put_contents($fileName, $firstLine ."\r\n",FILE_APPEND);
+            foreach ($rs as $r) {
+                $tString = "";
+                foreach($r as $key=>$content) {
+                    switch ($key) {
+                        case 'CHROM':
+                            //填充字符串
+                            $content = str_pad($content, 8);
+                            break;
+                        case 'POS':
+                            $content = str_pad($content, 12);
+                            break;
+                        case 'ID':
+                            $content = str_pad($content, 4);
+                            break;
+                        case 'REF':
+                            $content = str_pad($content, 4);
+                            break;
+                        case 'ALT':
+                            $content = str_pad($content, 4);
+                            break;
+                        case 'QUAL':
+                            $content = str_pad($content, 18);
+                            break;
+                        case 'FILTER':
+                            $content = str_pad($content, 8);
+                            break;
+                        case 'INFO':
+                            $content = str_pad($content, 172);
+                            break;
+                        case 'GT':
+                            $content = str_pad($content, 8);
+                            break;
+                        case 'AD':
+                            $content = str_pad($content, 8);
+                            break;
+                        case 'DP':
+                            $content = str_pad($content, 4);
+                            break;
+                        case 'GQ':
+                            $content = str_pad($content, 8);
+                            break;
+                        case 'PL':
+                            $content = str_pad($content, 12);
+                            break;
+                        case 'alu':
+                            break;
+                        default:
+                            break;
+                    }
+                    $tString = $tString .$content;
+                }
+                file_put_contents($fileName, $tString ."\r\n", FILE_APPEND);//以追加方式写入数据
+            }
+            fclose($fp);
+        } else {
+            echo "Download failed, please try again.";
+        }
+        //dd($fileName);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

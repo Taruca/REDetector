@@ -20,10 +20,26 @@
             <div class="col-sm-3 col-md-2 sidebar">
                 <h4>Your Profiles</h4>
                 <ul class="nav {{--nav-sidebar --}}nav-pills nav-stacked" role="tablist">
-                    <li role="presentation" class="active"><a href="#{{ $table1 }}" id="{{ $table1 }}-tab" role="tab" data-toggle="tab" {{--aria-controls="{{ $table1 }}" aria-expanded="true"--}}>{{ $table1 }}</a></li>
-                    @foreach($tableElse as $table)
-                        <li role="presentation"><a href="#{{ $table }}" id="{{ $table }}-tab" role="tab" data-toggle="tab" {{--aria-controls="{{ $table }}"--}}>{{ $table }}</a></li>
-                    @endforeach
+                    <li role="presentation" class="active"><a href="#{{ $table1 }}" id="{{ $table1 }}-tab" role="tab" data-toggle="tab" {{--aria-controls="{{ $table1 }}" aria-expanded="true"--}}>
+                            {{--{{ $table1 }}--}}
+                            <?php
+                            $newTableNameArray1 = explode('_', $table1);
+                            $newTableName1 = $newTableNameArray1[1] ."_" .$newTableNameArray1[4];
+                            echo $newTableName1;
+                            ?>
+                    </a></li>
+                    @if($tableElse !== "null")
+                        @foreach($tableElse as $table)
+                            <li role="presentation"><a href="#{{ $table }}" id="{{ $table }}-tab" role="tab" data-toggle="tab" {{--aria-controls="{{ $table }}"--}}>
+                                    {{--{{ $table }}--}}
+                                    <?php
+                                    $newTableNameArray = explode('_', $table);
+                                    $newTableName = $newTableNameArray[1] ."_" .$newTableNameArray[4];
+                                    echo $newTableName;
+                                    ?>
+                                </a></li>
+                        @endforeach
+                    @endif
                 </ul>
             </div>
 
@@ -33,50 +49,106 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Title</th>
-                                <th>Content</th>
+                                <th>CHROM</th>
+                                <th>POS</th>
+                                <th>ID</th>
+                                <th>REF</th>
+                                <th>ALT</th>
+                                <th>QUAL</th>
+                                <th>FILTER</th>
+                                <th>INFO</th>
+                                <th>GT</th>
+                                <th>AD</th>
+                                <th>DP</th>
+                                <th>GQ</th>
+                                <th>PL</th>
+                                <th>alu</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            @foreach($tableContents[0] as $content)
-                                <tr>
-                                    <td>{{ $content->id }}</td>
-                                    <td>{{ $content->title }}</td>
-                                    <td>{{ $content->content }}</td>
-                                </tr>
+                            @foreach($tableContents[0] as $rowNums => $content)
+                                @if($rowNums < 20)
+                                    <tr>
+                                        <td>{{ $content->CHROM }}</td>
+                                        <td>{{ $content->POS }}</td>
+                                        <td>{{ $content->ID }}</td>
+                                        <td>{{ $content->REF }}</td>
+                                        <td>{{ $content->ALT }}</td>
+                                        <td>{{ $content->QUAL }}</td>
+                                        <td>{{ $content->FILTER }}</td>
+                                        <td>{{ $content->INFO }}</td>
+                                        <td>{{ $content->GT }}</td>
+                                        <td>{{ $content->AD }}</td>
+                                        <td>{{ $content->DP }}</td>
+                                        <td>{{ $content->GQ }}</td>
+                                        <td>{{ $content->PL }}</td>
+                                        <td>{{ $content->alu }}</td>
+                                    </tr>
+                                @endif
                             @endforeach
                             </tbody>
                         </table>
+                        {{--download--}}
+                        <p>Above are 20 rows of the result, if you want to get all of it, please click <a href="{{ action('HomeController@download', [$table]) }}">here to download</a></p>
+
                     </div>
                 </div>
 
-                @foreach($tableElse as $table)
-                    <div role="tabpanel" class="tab-pane fade" id="{{ $table }}" {{--aria-labelledby="{{ $table }}-tab"--}}>
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Title</th>
-                                    <th>Content</th>
-                                </tr>
-                                </thead>
+                @if($tableElse !== "null")
+                    @foreach($tableElse as $table)
+                        <div role="tabpanel" class="tab-pane fade" id="{{ $table }}" {{--aria-labelledby="{{ $table }}-tab"--}}>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>CHROM</th>
+                                        <th>POS</th>
+                                        <th>ID</th>
+                                        <th>REF</th>
+                                        <th>ALT</th>
+                                        <th>QUAL</th>
+                                        <th>FILTER</th>
+                                        <th>INFO</th>
+                                        <th>GT</th>
+                                        <th>AD</th>
+                                        <th>DP</th>
+                                        <th>GQ</th>
+                                        <th>PL</th>
+                                        <th>alu</th>
+                                    </tr>
+                                    </thead>
 
-                                <tbody>
-                                @foreach(DB::table($table)->get() as $tableContent)
-                                        <tr>
-                                            <td>{{ $tableContent->id }}</td>
-                                            <td>{{ $tableContent->title }}</td>
-                                            <td>{{ $tableContent->content }}</td>
-                                        </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                                    <tbody>
+                                    @foreach(DB::table($table)->get() as $rowNums => $tableContent)
+                                        @if($rowNums < 20)
+                                            <tr>
+                                                <td>{{ $tableContent->CHROM }}</td>
+                                                <td>{{ $tableContent->POS }}</td>
+                                                <td>{{ $tableContent->ID }}</td>
+                                                <td>{{ $tableContent->REF }}</td>
+                                                <td>{{ $tableContent->ALT }}</td>
+                                                <td>{{ $tableContent->QUAL }}</td>
+                                                <td>{{ $tableContent->FILTER }}</td>
+                                                <td>{{ $tableContent->INFO }}</td>
+                                                <td>{{ $tableContent->GT }}</td>
+                                                <td>{{ $tableContent->AD }}</td>
+                                                <td>{{ $tableContent->DP }}</td>
+                                                <td>{{ $tableContent->GQ }}</td>
+                                                <td>{{ $tableContent->PL }}</td>
+                                                <td>{{ $tableContent->alu }}</td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                                {{--download--}}
+                                <p>Above are 20 rows of the result, if you want to get all of it, please click <a href="">here to download</a></p>
+
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                @endif
 
             </div>
         </div>
